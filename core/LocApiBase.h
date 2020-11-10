@@ -37,8 +37,6 @@
 #include <LocSharedLock.h>
 #include <log_util.h>
 
-using namespace loc_util;
-
 namespace loc_core {
 
 class ContextBase;
@@ -122,7 +120,7 @@ protected:
     inline virtual ~LocApiBase() {
         android_atomic_dec(&mMsgTaskRefCount);
         if (nullptr != mMsgTask && 0 == mMsgTaskRefCount) {
-            delete mMsgTask;
+            mMsgTask->destroy();
             mMsgTask = nullptr;
         }
     }
